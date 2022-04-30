@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     final wordPair = WordPair.random();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Random Words',
+      title: 'Random Words list',
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Random Words'),
