@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'Random Words list',
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Random Words'),
+          title: const Text('Random Words generating app'),
         ),
         body: Center(
           child: Text(wordPair.asPascalCase),
