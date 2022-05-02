@@ -12,19 +12,21 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final wordPair = WordPair.random();
     return MaterialApp(
+      title: "random words",
       debugShowCheckedModeBanner: false,
-      title: 'Random Words list',
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Random Words generating app'),
+          title: const Text('Random words generator'),
         ),
-        body: Center(
+        body:  Center(
           child: Text(wordPair.asPascalCase),
         ),
       ),
     );
   }
 }
+
+
 class RandomWords extends StatefulWidget {
   const RandomWords({ Key? key }) : super(key: key);
 
