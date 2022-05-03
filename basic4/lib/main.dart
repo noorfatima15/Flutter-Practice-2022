@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Random words generator'),
+          title: const Text('Random word generator'),
         ),
         body:  Center(
           child: Text(wordPair.asPascalCase),
