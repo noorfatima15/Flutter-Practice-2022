@@ -10,35 +10,75 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final wordPair = WordPair.random();
-    return MaterialApp(
+    //final wordPair = WordPair.random();
+    return const MaterialApp(
       title: "random words",
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Random word generator'),
-        ),
-        body:  Center(
-          child: Text(wordPair.asPascalCase),
-        ),
-      ),
+      home: RandomWords(),
     );
   }
 }
 
-
 class RandomWords extends StatefulWidget {
-  const RandomWords({ Key? key }) : super(key: key);
+  const RandomWords({Key? key}) : super(key: key);
 
   @override
   State<RandomWords> createState() => _RandomWordsState();
 }
 
 class _RandomWordsState extends State<RandomWords> {
+  final _suggestions = <WordPair>[];
+  final _saved = <WordPair>{};
+    final _biggerfont = const TextStyle(fontSize: 18);
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
+    //final wordPair = WordPair.random();
+    //return Text(wordPair.asPascalCase);
+    
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Random Words Generator'),
+      ),
+      body: _buildSuggestion(),
     );
+  
+}
+Widget _buildSuggestion(){
+return ListView.builder(
+  padding: const EdgeInsets.all(16),
+  itemBuilder: (context,i){
+    if (i.isOdd){
+      return const Divider();
+    }
+    final index = i~/2;
+    if(index >= _suggestions.length){
+      _suggestions.addAll(generateWordPairs().take(10));
+    }
+    final alreadySaved = _saved.contains(_suggestions[index]);
+    return _buildRow(_suggestions[index]);
   }
+);
+}
+Widget _buildRow(WordPair pair){
+  return ListTile(
+    title: Text(
+      pair.asPascalCase,
+      style: _biggerfont,
+    ),
+    trailing: Icon(    // NEW from here ...
+    alreadySaved ? Icons.favorite : Icons.favorite_border,
+    color: alreadySaved ? Colors.red : null,
+    semanticLabel: alreadySaved ? 'Remove from saved' : 'Save',
+  ),           
+  onTap: () {          // NEW from here ...
+    setState(() {
+      if (alreadySaved) {
+        _saved.remove(_suggestions[index]);
+      } else {
+        _saved.add(_suggestions[index]);
+      }
+    });                // to here.
+  },
+);
+}
 }
