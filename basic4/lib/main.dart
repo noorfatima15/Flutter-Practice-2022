@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     //final wordPair = WordPair.random();
     return const MaterialApp(
-      title: "random words",
+      title: "random words generating app",
       debugShowCheckedModeBanner: false,
       home: RandomWords(),
     );
@@ -28,7 +28,6 @@ class RandomWords extends StatefulWidget {
 
 class _RandomWordsState extends State<RandomWords> {
   final _suggestions = <WordPair>[];
-  final _saved = <WordPair>{};
     final _biggerfont = const TextStyle(fontSize: 18);
   @override
   Widget build(BuildContext context) {
@@ -54,7 +53,6 @@ return ListView.builder(
     if(index >= _suggestions.length){
       _suggestions.addAll(generateWordPairs().take(10));
     }
-    final alreadySaved = _saved.contains(_suggestions[index]);
     return _buildRow(_suggestions[index]);
   }
 );
@@ -65,20 +63,6 @@ Widget _buildRow(WordPair pair){
       pair.asPascalCase,
       style: _biggerfont,
     ),
-    trailing: Icon(    // NEW from here ...
-    alreadySaved ? Icons.favorite : Icons.favorite_border,
-    color: alreadySaved ? Colors.red : null,
-    semanticLabel: alreadySaved ? 'Remove from saved' : 'Save',
-  ),           
-  onTap: () {          // NEW from here ...
-    setState(() {
-      if (alreadySaved) {
-        _saved.remove(_suggestions[index]);
-      } else {
-        _saved.add(_suggestions[index]);
-      }
-    });                // to here.
-  },
-);
+  );
 }
 }
