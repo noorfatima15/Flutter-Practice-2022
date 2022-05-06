@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     //final wordPair = WordPair.random();
     return const MaterialApp(
-      title: "random words generating app",
+      title: "random words generating application",
       debugShowCheckedModeBanner: false,
       home: RandomWords(),
     );
